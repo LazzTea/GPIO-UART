@@ -27,4 +27,25 @@ input wire rx_line,
 output reg [7:0] data
 );
 
+reg [3:0] current_bit;
+reg state = 1'b0; // 0 is Idle, 1 is Data
+
+always @(posedge clk or posedge rst) begin
+  // Start Bit
+  if (current_bit == 0 && rx_line == 0) begin
+    data <= 8'b0;
+    state <= 1'b1;
+
+  // Stop Bit
+  end else if (current_bit >= 4'd10 && rx_line == 1) begin
+    current_bit = 4'b0;
+    state <= 1'b0;
+  
+  // Store Data
+  end else if () begin
+    data = data << 1;
+    data[0] = rx_line;
+  end
+end
+
 endmodule

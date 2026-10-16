@@ -27,4 +27,30 @@ input wire [7:0] data,
 output wire tx_line
 );
 
+reg [3:0] current_bit;
+reg state <= 1'b0; // 0 is Idle, 1 is Data
+
+reg [7:0] loaded_data;
+reg loaded_tx_line;
+
+always @(posedge clk or posedge rst) begin
+  // Start Bit
+  if (current_bit == 4'b0 && state == 1'b0) begin
+    loaded_data <= data;
+    state <= 1'b1;
+    
+  // Stop Bit
+  end else if (current_bit == 4'd10) begin
+    // current_bit <= 4'b0; Assuming that once it sends its bits, transmitting is done.  Leaving value prevents sending the same data
+    state <= 1'b0;
+
+  // Send Bit
+  end else if (state == 1'b1) begin
+    loaded_tx_line <= loaded_data[0];
+    loaded_data <= loaded_data >> 1;
+  end
+end
+
+assign tx_line <= loaded_tx_line;
+
 endmodule
