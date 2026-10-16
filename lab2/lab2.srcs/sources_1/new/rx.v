@@ -37,7 +37,7 @@ always @(posedge clk or posedge rst) begin
     state <= 1'b1;
 
   // Stop Bit
-  end else if (current_bit >= 4'd10 && rx_line == 1) begin
+  end else if (current_bit >= 4'd10) begin
     current_bit = 4'b0;
     state <= 1'b0;
   

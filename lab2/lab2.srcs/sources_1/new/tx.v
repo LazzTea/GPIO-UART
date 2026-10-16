@@ -43,6 +43,7 @@ always @(posedge clk or posedge rst) begin
   end else if (current_bit == 4'd10) begin
     // current_bit <= 4'b0; Assuming that once it sends its bits, transmitting is done.  Leaving value prevents sending the same data
     state <= 1'b0;
+    loaded_tx_line <= 1'b1;
 
   // Send Bit
   end else if (state == 1'b1) begin
