@@ -38,6 +38,7 @@ always @(posedge clk or posedge rst) begin
   if (current_bit == 4'b0 && state == 1'b0) begin
     loaded_data <= data;
     state <= 1'b1;
+    current_bit = current_bit + 1;
     
   // Stop Bit
   end else if (current_bit == 4'd10) begin
