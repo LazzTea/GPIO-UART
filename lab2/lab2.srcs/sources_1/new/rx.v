@@ -27,7 +27,7 @@ input wire rx_line,
 output reg [7:0] data
 );
 
-reg [3:0] current_bit;
+reg [3:0] current_bit = 4'b0;
 reg state = 1'b0; // 0 is Idle, 1 is Data
 
 always @(posedge clk or posedge rst) begin
@@ -43,8 +43,7 @@ always @(posedge clk or posedge rst) begin
   
   // Store Data
   end else if () begin
-    data = data << 1;
-    data[0] = rx_line;
+    data[current_bit-1] = rx_line;
   end
 end
 
