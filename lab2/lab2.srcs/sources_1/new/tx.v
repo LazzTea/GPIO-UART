@@ -21,6 +21,10 @@
 
 
 module tx(
+input wire clk,
+input wire rst,
+input wire [7:0] data,
+output wire tx_line
+);
 
-    );
 endmodule
