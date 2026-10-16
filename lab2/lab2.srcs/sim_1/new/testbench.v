@@ -22,5 +22,33 @@
 
 module testbench();
 
+reg clk;
+reg rst;
+
+reg [7:0] input;
+reg [7:0] output;
+
+reg data;
+
+tx trans(
+  clk,
+  rst,
+  input,
+  data
+);
+
+rx recv (
+  clk,
+  rst,
+  data,
+  output
+);
+
+initial begin
+  
+end
+
+
+
 
 endmodule
