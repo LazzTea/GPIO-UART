@@ -28,7 +28,7 @@ output wire tx_line
 );
 
 reg [3:0] current_bit;
-reg state <= 1'b0; // 0 is Idle, 1 is Data
+reg state = 1'b0; // 0 is Idle, 1 is Data
 
 reg [7:0] loaded_data;
 reg loaded_tx_line;
@@ -54,6 +54,6 @@ always @(posedge clk or posedge rst) begin
   end
 end
 
-assign tx_line <= loaded_tx_line;
+assign tx_line = loaded_tx_line;
 
 endmodule
