@@ -49,6 +49,7 @@ always @(posedge clk or posedge rst) begin
   end else if (state == 1'b1) begin
     loaded_tx_line <= loaded_data[0];
     loaded_data <= loaded_data >> 1;
+    current_bit = current_bit + 1;
   end
 end
 
