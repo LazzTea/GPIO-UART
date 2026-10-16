@@ -42,7 +42,7 @@ always @(posedge clk or posedge rst) begin
     state <= 1'b0;
   
   // Store Data
-  end else if () begin
+  end else if (state == 1'b1) begin
     data[current_bit-1] = rx_line;
   end
 end
