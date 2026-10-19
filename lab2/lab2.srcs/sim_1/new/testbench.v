@@ -28,19 +28,21 @@ reg rst;
 reg [7:0] data_in;
 reg [7:0] data_out;
 
+wire tx_line;
+
 integer errors = 0;
 
 tx trans(
   clk,
   rst,
-  input,
-  data_in
+  data_in,
+  tx_line
 );
 
 rx recv (
   clk,
   rst,
-  data,
+  tx_line,
   data_out
 );
 
