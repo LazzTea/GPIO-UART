@@ -26,7 +26,7 @@ reg clk;
 reg rst;
 
 reg [7:0] data_in;
-reg [7:0] data_out;
+wire [7:0] data_out;
 
 wire tx_line;
 
