@@ -28,7 +28,7 @@ reg rst;
 reg [7:0] data_in;
 wire [7:0] data_out;
 
-wire tx_line;
+wire tx_line = 1;
 
 integer errors = 0;
 
