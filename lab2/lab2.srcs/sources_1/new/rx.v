@@ -37,7 +37,7 @@ always @(posedge clk or posedge rst) begin
   if (rst) begin
     state <= 1'b0;
     bit_count <= 4'b0;
-    // data <= 8'b0;
+    data <= 8'b0;
     loaded_data <= 8'b0;
 
   end else begin
