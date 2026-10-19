@@ -25,37 +25,56 @@ module testbench();
 reg clk;
 reg rst;
 
-reg [7:0] input;
-reg [7:0] output;
+reg [7:0] data_in;
+reg [7:0] data_out;
 
-reg data;
+integer errors = 0;
 
 tx trans(
   clk,
   rst,
   input,
-  data
+  data_in
 );
 
 rx recv (
   clk,
   rst,
   data,
-  output
+  data_out
 );
+
+task send_data_test(input [7:0] data);
+begin
+  @(negedge clk);
+  data_in = data;
+  #20000
+  @(negedge clk);
+  if (data_out == data) begin
+    $display("PASS: sent %h, got %h at %0t", data, data_out, $time);
+  end else begin
+    $display("FAILED: sent %h, got %h at %0t", data, data_out, $time);
+    errors = errors + 1;
+  end
+end
+endtask
 
 initial clk = 0;
 initial rst = 0;
 
-always #5000 clk = ~clk;
+always #5 clk = ~clk;
 
 initial begin
-  input = 8'b00110011;
-  #100
-  
+  send_data_test(8'b11111111);
+  send_data_test(8'b00000000);
+  send_data_test(8'b10101010);
+
+  if (errors == 0) $display("ALL TESTS PASSED");
+  else             $display("%0d ERRORS", errors);
+  $finish;
 end
 
 
-
-
 endmodule
+
+
