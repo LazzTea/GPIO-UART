@@ -89,8 +89,14 @@ initial rst = 0;
 always #5 clk = ~clk;
 
 initial begin
+  rst = 1;
+  rst = 0;
   send_data_test(8'b11111111, 1);
+  rst = 1;
+  rst = 0;
   send_data_test(8'b00000000, 1);
+  rst = 1;
+  rst = 0;
   send_data_test(8'b10101010, 1);
 
   if (errors == 0) $display("ALL TESTS PASSED");
