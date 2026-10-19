@@ -44,7 +44,14 @@ rx recv (
   output
 );
 
+initial clk = 0;
+initial rst = 0;
+
+always #5000 clk = ~clk;
+
 initial begin
+  input = 8'b00110011;
+  #100
   
 end
 

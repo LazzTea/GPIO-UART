@@ -24,28 +24,36 @@ module rx(
 input wire clk,
 input wire rst,
 input wire rx_line,
+
 output reg [7:0] data
 );
 
-reg [3:0] current_bit = 4'b0;
+reg [3:0] bit_count = 4'b0;
 reg state = 1'b0; // 0 is Idle, 1 is Data
 
 always @(posedge clk or posedge rst) begin
-  // Start Bit
-  if (current_bit == 0 && rx_line == 0) begin
-    data <= 8'b0;
-    state <= 1'b1;
-    current_bit = current_bit + 1;
-
-  // Stop Bit
-  end else if (current_bit >= 4'd10) begin
-    current_bit = 4'b0;
+  if (rst) begin
     state <= 1'b0;
-  
-  // Store Data
-  end else if (state == 1'b1) begin
-    data[current_bit-1] = rx_line;
-    current_bit = current_bit + 1;
+    bit_count <= 4'b0;
+    data <= 8'b0;
+
+  end else begin
+    if (!state) begin
+      if (!rx_line) begin
+        state <= 1'b1;
+        bit_count <= 4'b0;
+      end
+
+    end else if (bit_count < 4'd7) begin
+      data <= {rx_line, data[7:1]};
+      bit_count <= bit_count + 1;
+
+    end else begin
+      // if (rx_line) begin // make sure rx_line last bit is 1
+
+      // end
+      state <= 1'b0;
+      end
   end
 end
 

@@ -24,33 +24,35 @@ module tx(
 input wire clk,
 input wire rst,
 input wire [7:0] data,
+
 output wire tx_line
 );
 
-reg [3:0] current_bit;
+reg [3:0] bit_count;
 reg state = 1'b0; // 0 is Idle, 1 is Data
 
 reg [7:0] loaded_data;
 reg loaded_tx_line;
 
 always @(posedge clk or posedge rst) begin
-  // Start Bit
-  if (current_bit == 4'b0 && state == 1'b0) begin
-    loaded_data <= data;
-    state <= 1'b1;
-    current_bit = current_bit + 1;
-    
-  // Stop Bit
-  end else if (current_bit == 4'd10) begin
-    // current_bit <= 4'b0; Assuming that once it sends its bits, transmitting is done.  Leaving value prevents sending the same data
+  if (rst) begin
     state <= 1'b0;
-    loaded_tx_line <= 1'b1;
+    bit_count <= 4'b0;
+    tx_line <= 1;
 
-  // Send Bit
-  end else if (state == 1'b1) begin
-    loaded_tx_line <= loaded_data[0];
-    loaded_data <= loaded_data >> 1;
-    current_bit = current_bit + 1;
+  end else if (!state) begin
+    tx_line <= 1'b1;
+    bit_count <= 4'b1;
+    state <= 1'b1;
+
+  end else if (bit_count < 4'd8) begin
+    tx_line <= data[0];
+    data = data >> 1;
+    bit_count = bit_count + 1;
+    
+  end else begin
+    tx_line <= 1'b1;
+    state <= 1'b0;
   end
 end
 
