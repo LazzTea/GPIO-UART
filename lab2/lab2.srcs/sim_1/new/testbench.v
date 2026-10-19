@@ -77,9 +77,9 @@ always #5 clk = ~clk;
 always #5 @(posedge clk) $display("Transfer Signal %b", tx_line);
 
 initial begin
-  test_transmission(8'b11111111, 1);
-  test_transmission(8'b00000000, 1);
-  test_transmission(8'b10101010, 1);
+  test_transmission(8'b11111111);
+  test_transmission(8'b00000000);
+  test_transmission(8'b10101010);
 
   if (errors == 0) $display("ALL TESTS PASSED");
   else             $display("%0d ERRORS", errors);
