@@ -46,11 +46,33 @@ rx recv (
   data_out
 );
 
-task send_data_test(input [7:0] data);
+task send_data_test(input [7:0] data, input dbt);
 begin
   @(negedge clk);
   data_in = data;
-  #20000
+  // Print each data point
+  if (dbt) begin
+  @(posedge clk);
+    $display("Data Bit Transfer %b", tx_line);
+    @(posedge clk);
+    $display("Data Bit Transfer %b", tx_line);
+    @(posedge clk);
+    $display("Data Bit Transfer %b", tx_line);
+    @(posedge clk);
+    $display("Data Bit Transfer %b", tx_line);
+    @(posedge clk);
+    $display("Data Bit Transfer %b", tx_line);
+    @(posedge clk);
+    $display("Data Bit Transfer %b", tx_line);
+    @(posedge clk);
+    $display("Data Bit Transfer %b", tx_line);
+    @(posedge clk);
+    $display("Data Bit Transfer %b", tx_line);
+    @(posedge clk);
+    $display("Data Bit Transfer %b", tx_line);
+    @(posedge clk);
+    $display("Data Bit Transfer %b", tx_line);
+  end
   @(negedge clk);
   if (data_out == data) begin
     $display("PASS: sent %b, got %b at %0t", data, data_out, $time);
@@ -67,9 +89,9 @@ initial rst = 0;
 always #5 clk = ~clk;
 
 initial begin
-  send_data_test(8'b11111111);
-  send_data_test(8'b00000000);
-  send_data_test(8'b10101010);
+  send_data_test(8'b11111111, 1);
+  send_data_test(8'b00000000, 1);
+  send_data_test(8'b10101010, 1);
 
   if (errors == 0) $display("ALL TESTS PASSED");
   else             $display("%0d ERRORS", errors);
