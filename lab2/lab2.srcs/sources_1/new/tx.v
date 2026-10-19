@@ -39,15 +39,17 @@ always @(posedge clk or posedge rst) begin
     state <= 1'b0;
     bit_count <= 4'b0;
     loaded_tx_line <= 1;
+    loaded_data <= data;
 
   end else if (!state) begin
     loaded_tx_line <= 1'b1;
     bit_count <= 4'b1;
     state <= 1'b1;
+    loaded_data <= data;
 
   end else if (bit_count < 4'd8) begin
     loaded_tx_line <= data[0];
-    data = data >> 1;
+    loaded_data = loaded_data >> 1;
     bit_count = bit_count + 1;
 
   end else begin
