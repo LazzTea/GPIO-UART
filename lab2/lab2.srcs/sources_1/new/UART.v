@@ -59,14 +59,14 @@ tx transmitter(
     .rst(rst),
     .data(data_to_send),
     .tx_line(TX)
-)
+);
 
 rx receiver(
     .clk(baud_tick),
     .rst(rst),
     .rx_line(RX),
     .data(data_received)
-)
+);
 
 
 endmodule
