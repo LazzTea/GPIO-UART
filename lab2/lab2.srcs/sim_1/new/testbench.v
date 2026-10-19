@@ -53,9 +53,9 @@ begin
   #20000
   @(negedge clk);
   if (data_out == data) begin
-    $display("PASS: sent %h, got %h at %0t", data, data_out, $time);
+    $display("PASS: sent %b, got %b at %0t", data, data_out, $time);
   end else begin
-    $display("FAILED: sent %h, got %h at %0t", data, data_out, $time);
+    $display("FAILED: sent %b, got %b at %0t", data, data_out, $time);
     errors = errors + 1;
   end
 end
