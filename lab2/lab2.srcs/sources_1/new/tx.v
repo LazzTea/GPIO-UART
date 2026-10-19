@@ -32,7 +32,7 @@ reg [3:0] bit_count;
 reg state = 1'b0; // 0 is Idle, 1 is Data
 
 reg [7:0] loaded_data;
-reg loaded_tx_line;
+reg loaded_tx_line = 1'b1;
 
 always @(posedge clk or posedge rst) begin
   if (rst) begin
@@ -42,7 +42,7 @@ always @(posedge clk or posedge rst) begin
     loaded_data <= data;
 
   end else if (!state) begin
-    loaded_tx_line <= 1'b1;
+    loaded_tx_line <= 1'b0;
     bit_count <= 4'b1;
     state <= 1'b1;
     loaded_data <= data;
