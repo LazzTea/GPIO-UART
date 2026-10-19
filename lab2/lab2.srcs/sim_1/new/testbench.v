@@ -52,25 +52,25 @@ begin
   data_in = data;
   // Print each data point
   if (dbt) begin
-  @(posedge clk);
+    @(negedge clk);
     $display("Data Bit Transfer %b", tx_line);
-    @(posedge clk);
+    @(negedge clk);
     $display("Data Bit Transfer %b", tx_line);
-    @(posedge clk);
+    @(negedge clk);
     $display("Data Bit Transfer %b", tx_line);
-    @(posedge clk);
+    @(negedge clk);
     $display("Data Bit Transfer %b", tx_line);
-    @(posedge clk);
+    @(negedge clk);
     $display("Data Bit Transfer %b", tx_line);
-    @(posedge clk);
+    @(negedge clk);
     $display("Data Bit Transfer %b", tx_line);
-    @(posedge clk);
+    @(negedge clk);
     $display("Data Bit Transfer %b", tx_line);
-    @(posedge clk);
+    @(negedge clk);
     $display("Data Bit Transfer %b", tx_line);
-    @(posedge clk);
+    @(negedge clk);
     $display("Data Bit Transfer %b", tx_line);
-    @(posedge clk);
+    @(negedge clk);
     $display("Data Bit Transfer %b", tx_line);
   end
   @(negedge clk);
