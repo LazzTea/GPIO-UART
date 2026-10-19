@@ -74,7 +74,7 @@ initial clk = 0;
 initial rst = 0;
 
 always #5 clk = ~clk;
-always #5 @(posedge clk) $display("Transfer Signal %b", tx_line);
+always @(posedge clk) $display("%0t: Transfer Signal %b", $time, tx_line);
 
 initial begin
   test_transmission(8'b11111111);
