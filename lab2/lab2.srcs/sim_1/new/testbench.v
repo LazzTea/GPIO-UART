@@ -28,7 +28,7 @@ reg rst;
 reg [7:0] data_in;
 wire [7:0] data_out;
 
-wire tx_line = 1;
+wire tx_line;
 
 integer errors = 0;
 
@@ -47,64 +47,19 @@ rx recv (
 );
 
 
-task test_transmission(input [7:0] data, input dbt);
+task test_transmission(input [7:0] data);
 begin
   @(negedge clk);
   data_in = data;
   rst = 1;
-  @(negedge clk);
   rst = 0;
-  if (dbt) begin
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-  end
 end
 endtask
 
-task send_data_test(input [7:0] data, input dbt);
+task send_data_test(input [7:0] data);
 begin
   @(negedge clk);
   data_in = data;
-  // Print each data point
-  if (dbt) begin
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-    @(negedge clk);
-    $display("Data Bit Transfer %b", tx_line);
-  end
   @(negedge clk);
   if (data_out == data) begin
     $display("PASS: sent %b, got %b at %0t", data, data_out, $time);
@@ -119,6 +74,7 @@ initial clk = 0;
 initial rst = 0;
 
 always #5 clk = ~clk;
+always #5 @(posedge clk) $display("Transfer Signal %b", tx_line);
 
 initial begin
   test_transmission(8'b11111111, 1);
