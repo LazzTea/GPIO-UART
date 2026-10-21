@@ -23,12 +23,14 @@
 module UART(
     output wire TX,
     input wire RX,
+    input wire rst,
     input wire VCC,
     input wire GND,
     input wire clk
 );
 
 
+wire send_data;
 wire [7:0] data_to_send;
 wire [7:0] data_received;
 
