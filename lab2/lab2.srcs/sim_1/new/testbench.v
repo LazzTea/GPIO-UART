@@ -88,6 +88,7 @@ begin
     $display("Current Recveiver Bit %b", false_tx_line);
     $display("Current Data In Bits %b", false_data_in);
     false_data_in = false_data_in >> 1;
+    false_data_in[10] = 1;
   end
 
   if (data_out == expected_out) begin
