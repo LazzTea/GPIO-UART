@@ -47,16 +47,6 @@ rx recv (
 );
 
 
-task test_transmission(input [7:0] data);
-begin
-  @(negedge clk);
-  data_in = data;
-  rst = 1;
-  @(negedge clk);
-  rst = 0;
-end
-endtask
-
 task send_data_test(input [7:0] data);
 begin
   @(negedge clk);
@@ -74,6 +64,7 @@ begin
 end
 endtask
 
+
 initial clk = 0;
 initial rst = 0;
 
@@ -81,9 +72,17 @@ always #5 clk = ~clk;
 always @(posedge clk) $display("%0t: Transfer Signal %b", $time, tx_line);
 
 initial begin
-  send_data_test(8'b11111111);
+  // Test Max & Min
   send_data_test(8'b00000000);
+  send_data_test(8'b11111111);
+
+  // Test Different start/end bits between
+  send_data_test(8'b10000001);
+  send_data_test(8'b01111110);
+
+  // Test back and forth between 1 and 0
   send_data_test(8'b10101010);
+  send_data_test(8'b01010101);
 
   if (errors == 0) $display("ALL TESTS PASSED");
   else             $display("%0d ERRORS", errors);
