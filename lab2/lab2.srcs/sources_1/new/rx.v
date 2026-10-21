@@ -36,20 +36,20 @@ reg [7:0] loaded_data;
 always @(posedge clk or posedge rst) begin
   if (rst) begin
     state <= 1'b0;
-    bit_count <= 4'b1;
+    bit_count <= 4'b0;
     data <= 8'b0;
     loaded_data <= 8'b0;
 
   end else begin
-    if (!state) begin
+    if (!state && bit_count == 4'b0) begin
       if (!rx_line) begin
         state <= 1'b1;
-        bit_count <= 4'b1;
+        bit_count <= 4'b0;
         data <= 8'b0;
         loaded_data <= 8'b0;
       end
 
-    end else if (bit_count < 4'd9) begin
+    end else if (bit_count < 4'd8) begin
       loaded_data <= {rx_line, loaded_data[7:1]};
       bit_count <= bit_count + 1;
 
