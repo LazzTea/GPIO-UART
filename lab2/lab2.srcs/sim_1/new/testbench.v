@@ -114,19 +114,19 @@ initial begin
   send_data_test(8'b01010101);
 
 
-    /// Interuption Testing
-    // Test Max & Min
-    interuption_test(8'b00000000, 0);
-    interuption_test(8'b11111111, 2);
+  /// Interuption Testing
+  // Test Max & Min
+  interuption_test(8'b00000000, 0);
+  interuption_test(8'b11111111, 2);
 
-    // Test Different start/end bits between
-    interuption_test(8'b10000001, 4);
-    interuption_test(8'b01111110, 6);
+  // Test Different start/end bits between
+  interuption_test(8'b10000001, 4);
+  interuption_test(8'b01111110, 6);
 
-    // Test back and forth between 1 and 0
-    interuption_test(8'b10101010, 8);
-    interuption_test(8'b01010101, 10);
-    interuption_test(8'b01010101, 12);
+  // Test back and forth between 1 and 0
+  interuption_test(8'b10101010, 8);
+  interuption_test(8'b01010101, 10);
+  interuption_test(8'b01010101, 12);
 
   if (errors == 0) $display("ALL TESTS PASSED");
   else             $display("%0d ERRORS", errors);
