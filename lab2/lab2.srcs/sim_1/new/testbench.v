@@ -27,8 +27,10 @@ reg rst;
 
 reg [7:0] data_in;
 wire [7:0] data_out;
+wire [7:0] false_data_out;
 
 wire tx_line;
+reg false_tx_line;
 
 integer errors = 0;
 
@@ -44,6 +46,13 @@ rx recv (
   rst,
   tx_line,
   data_out
+);
+
+solo_rx recv (
+  clk,
+  rst,
+  false_tx_line,
+  false_data_out
 );
 
 
@@ -74,12 +83,12 @@ begin
   rst = 0;
 
   repeat(10) @(negedge clk) begin
-    tx_line = data_in[0];
+    false_tx_line = data_in[0];
     data_in = data_in >> 1;
   end
 
   if (data_out == expected_out) begin
-    $display("PASS: sent %b, got %b, expected %b at %0t", data, data_out, expected_out, $time);
+    $display("PASS: sent %b, got %b, expected %b at %0t", data, false_data_out, expected_out, $time);
   end else begin
     $display("FAILED: sent %b, got %b, expected %b at %0t", data, data_out, expected_out, $time);
     errors = errors + 1;
