@@ -28,7 +28,7 @@ reg rst;
 reg [7:0] data_in;
 wire [7:0] data_out;
 
-wire tx_line;
+reg tx_line;
 
 integer errors = 0;
 
@@ -152,10 +152,10 @@ initial begin
   interuption_test(8'b01010101, 12);
 
   // Exclusively Test Receiver
-  receiver_test(10'b0111111110, 8'b00000000)
-  receiver_test(10'b0111111111, 8'b11111111)
-  receiver_test(10'b1111111110, 8'b00000000)
-  receiver_test(10'b1111111111, 8'b00000000)
+  receiver_test(10'b0111111110, 8'b00000000);
+  receiver_test(10'b0111111111, 8'b11111111);
+  receiver_test(10'b1111111110, 8'b00000000);
+  receiver_test(10'b1111111111, 8'b00000000);
 
   if (errors == 0) $display("ALL TESTS PASSED");
   else             $display("%0d ERRORS", errors);
