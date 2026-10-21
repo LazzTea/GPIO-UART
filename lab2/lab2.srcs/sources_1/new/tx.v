@@ -24,7 +24,7 @@ module tx(
 input wire clk,
 input wire rst,
 input wire [7:0] data,
-
+input wire send_data,
 output wire tx_line
 );
 
@@ -38,22 +38,26 @@ always @(posedge clk or posedge rst) begin
   if (rst) begin
     state <= 1'b0;
     bit_count <= 4'b0;
-    loaded_tx_line <= 1;
-    loaded_data <= data;
+    loaded_tx_line <= 1'b1;
+    loaded_data <= 8'b0;
 
-  end else if (!state && bit_count == 4'b0) begin
-    loaded_tx_line <= 1'b0;
-    bit_count <= 4'b0;
-    state <= 1'b1;
-    loaded_data <= data;
+  end else if (!state) begin
+    loaded_tx_line <= 1'b1;
 
-  end else if (state && bit_count < 4'd8) begin
+    if (send_data) begin
+      loaded_data <= data;
+      loaded_tx_line <= 1'b0;  // start bit
+      bit_count <= 4'd0;
+      state <= 1'b1;
+    end
+
+  end else if (bit_count < 4'd8) begin
     loaded_tx_line <= loaded_data[0];
     loaded_data <= loaded_data >> 1;
-    bit_count <= bit_count + 1;
+    bit_count <= bit_count + 1'b1;
 
   end else begin
-    loaded_tx_line <= 1'b1;
+    loaded_tx_line <= 1'b1;    // stop bit
     state <= 1'b0;
   end
 end

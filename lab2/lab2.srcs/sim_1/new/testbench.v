@@ -36,10 +36,11 @@ reg false_tx_line;
 integer errors = 0;
 
 tx trans(
-  clk,
-  rst,
-  data_in,
-  tx_line
+  .clk(clk),
+  .rst(rst),
+  .data(data_in),
+  .send_data(1'b1),
+  .tx_line(tx_line)
 );
 
 rx recv (

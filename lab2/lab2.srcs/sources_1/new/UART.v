@@ -24,15 +24,12 @@ module UART(
     output wire TX,
     input wire RX,
     input wire rst,
-    input wire VCC,
-    input wire GND,
-    input wire clk
+    input wire clk,
+    input wire send_data,
+    input wire [7:0] data_to_send,
+    output wire [7:0] data_received
 );
 
-
-wire send_data;
-wire [7:0] data_to_send;
-wire [7:0] data_received;
 
 
 reg [12:0] ticker = 13'd0;
@@ -60,6 +57,7 @@ tx transmitter(
     .clk(baud_tick),
     .rst(rst),
     .data(data_to_send),
+    .send_data(send_data),
     .tx_line(TX)
 );
 
@@ -69,6 +67,17 @@ rx receiver(
     .rx_line(RX),
     .data(data_received)
 );
+
+
+always @(posedge clk or posedge rst) begin
+    if (rst) begin
+        
+
+    end else if (send_data) begin
+        
+
+    end
+end
 
 
 endmodule
