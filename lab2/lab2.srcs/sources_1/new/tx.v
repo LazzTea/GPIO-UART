@@ -25,6 +25,7 @@ input wire clk,
 input wire rst,
 input wire [7:0] data,
 input wire send_data,
+
 output wire tx_line
 );
 
