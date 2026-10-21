@@ -92,7 +92,7 @@ begin
     false_data_in[9] = 1'b1;
   end
 
-  if (data_out == expected_out) begin
+  if (false_data_out == expected_out) begin
     $display("PASS: sent %b, got %b, expected %b at %0t", data, false_data_out, expected_out, $time);
   end else begin
     $display("FAILED: sent %b, got %b, expected %b at %0t", data, data_out, expected_out, $time);
