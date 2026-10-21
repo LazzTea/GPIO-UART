@@ -27,6 +27,7 @@ reg rst;
 
 reg [7:0] data_in;
 wire [7:0] data_out;
+reg [9:0] false_data_in;
 wire [7:0] false_data_out;
 
 wire tx_line;
@@ -77,16 +78,16 @@ endtask
 task receiver_test(input [9:0] data, input [7:0] expected_out);
 begin
   @(negedge clk);
-  data_in = data;
+  false_data_in = data;
   rst = 1;
   @(negedge clk);
   rst = 0;
 
   repeat(10) @(negedge clk) begin
-    false_tx_line = data_in[0];
+    false_tx_line = false_data_in[0];
     $display("Current Recveiver Bit %b", false_tx_line);
-    $display("Current Data In Bits %b", data_in);
-    data_in = data_in >> 1;
+    $display("Current Data In Bits %b", false_data_in);
+    false_data_in = false_data_in >> 1;
   end
 
   if (data_out == expected_out) begin
