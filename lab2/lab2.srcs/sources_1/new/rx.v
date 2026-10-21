@@ -54,7 +54,7 @@ always @(posedge clk or posedge rst) begin
       bit_count <= bit_count + 1;
 
     end else begin
-      if (rx_line) begin // make sure rx_line last bit is 1
+      if (state && rx_line) begin // make sure rx_line last bit is 1
         data <= loaded_data;
       end
       state <= 1'b0;
