@@ -31,7 +31,7 @@ output wire tx_line
 reg [3:0] bit_count = 4'b0;
 reg state = 1'b0; // 0 is Idle, 1 is Data
 
-reg [7:0] loaded_data;
+reg [7:0] loaded_data = 8'b0;
 reg loaded_tx_line = 1'b1;
 
 always @(posedge clk or posedge rst) begin

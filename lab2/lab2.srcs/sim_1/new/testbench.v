@@ -55,10 +55,33 @@ begin
   @(negedge clk);
   rst = 0;
   repeat(12) @(negedge clk);
-  if (data_out == data_in) begin
-    $display("PASS: sent %b, got %b at %0t", data_in, data_out, $time);
+  if (data_out == data) begin
+    $display("PASS: sent %b, got %b at %0t", data, data_out, $time);
   end else begin
-    $display("FAILED: sent %b, got %b at %0t", data_in, data_out, $time);
+    $display("FAILED: sent %b, got %b at %0t", data, data_out, $time);
+    errors = errors + 1;
+  end
+end
+endtask
+
+
+task receiver_test(input [9:0] data, input [7:0] expected_out);
+begin
+  @(negedge clk);
+  data_in = data;
+  rst = 1;
+  @(negedge clk);
+  rst = 0;
+
+  repeat(10) @(negedge clk) begin
+    tx_line = data_in[0];
+    data_in = data_in >> 1;
+  end
+
+  if (data_out == expected_out) begin
+    $display("PASS: sent %b, got %b, expected %b at %0t", data, data_out, expected_out, $time);
+  end else begin
+    $display("FAILED: sent %b, got %b, expected %b at %0t", data, data_out, expected_out, $time);
     errors = errors + 1;
   end
 end
@@ -84,10 +107,10 @@ begin
   repeat(12) @(negedge clk);
 
   // Check Final output
-  if (data_out == data_in) begin
-    $display("PASS: sent %b, got %b at %0t", data_in, data_out, $time);
+  if (data_out == data) begin
+    $display("PASS: sent %b, got %b at %0t", data, data_out, $time);
   end else begin
-    $display("FAILED: sent %b, got %b at %0t", data_in, data_out, $time);
+    $display("FAILED: sent %b, got %b at %0t", data, data_out, $time);
     errors = errors + 1;
   end
 end
@@ -127,6 +150,12 @@ initial begin
   interuption_test(8'b10101010, 8);
   interuption_test(8'b01010101, 10);
   interuption_test(8'b01010101, 12);
+
+  // Exclusively Test Receiver
+  receiver_test(10'b0111111110, 8'b00000000)
+  receiver_test(10'b0111111111, 8'b11111111)
+  receiver_test(10'b1111111110, 8'b00000000)
+  receiver_test(10'b1111111111, 8'b00000000)
 
   if (errors == 0) $display("ALL TESTS PASSED");
   else             $display("%0d ERRORS", errors);
