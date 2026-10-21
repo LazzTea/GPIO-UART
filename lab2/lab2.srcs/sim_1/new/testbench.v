@@ -162,8 +162,8 @@ initial begin
 
   // Exclusively Test Receiver
   receiver_test(10'b0111111110, 8'b00000000);
-  receiver_test(10'b0111111111, 8'b11111111);
-  receiver_test(10'b1111111110, 8'b00000000);
+  receiver_test(10'b0111111111, 8'b00000000);
+  receiver_test(10'b1111111110, 8'b11111111);
   receiver_test(10'b1111111111, 8'b00000000);
 
   if (errors == 0) $display("ALL TESTS PASSED");
