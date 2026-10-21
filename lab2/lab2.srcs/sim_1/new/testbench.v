@@ -84,8 +84,9 @@ begin
 
   repeat(10) @(negedge clk) begin
     false_tx_line = data_in[0];
-    data_in = data_in >> 1;
     $display("Current Recveiver Bit %b", false_tx_line);
+    $display("Current Data In Bits %b", data_in);
+    data_in = data_in >> 1;
   end
 
   if (data_out == expected_out) begin
@@ -131,7 +132,7 @@ initial clk = 0;
 initial rst = 0;
 
 always #5 clk = ~clk;
-always @(posedge clk) $display("%0t: Transfer Signal %b", $time, tx_line);
+// always @(posedge clk) $display("%0t: Transfer Signal %b", $time, tx_line);
 
 initial begin
   // Test Max & Min
