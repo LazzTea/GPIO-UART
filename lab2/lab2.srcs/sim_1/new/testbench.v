@@ -85,7 +85,7 @@ begin
   repeat(10) @(negedge clk) begin
     false_tx_line = data_in[0];
     data_in = data_in >> 1;
-    display("Current Recveiver Bit %b", false_tx_line);
+    $display("Current Recveiver Bit %b", false_tx_line);
   end
 
   if (data_out == expected_out) begin
