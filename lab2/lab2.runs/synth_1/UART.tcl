@@ -42,6 +42,9 @@ read_verilog -library xil_defaultlib {
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
+read_xdc C:/Users/Student/GPIO-UART/lab2/lab2.srcs/constrs_1/new/constraints.xdc
+set_property used_in_implementation false [get_files C:/Users/Student/GPIO-UART/lab2/lab2.srcs/constrs_1/new/constraints.xdc]
+
 set_param ips.enableIPCacheLiteLoad 0
 close [open __synthesis_is_running__ w]
 
