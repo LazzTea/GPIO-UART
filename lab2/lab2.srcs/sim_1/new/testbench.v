@@ -95,7 +95,7 @@ begin
   if (false_data_out == expected_out) begin
     $display("PASS: sent %b, got %b, expected %b at %0t", data, false_data_out, expected_out, $time);
   end else begin
-    $display("FAILED: sent %b, got %b, expected %b at %0t", data, data_out, expected_out, $time);
+    $display("FAILED: sent %b, got %b, expected %b at %0t", data, false_data_out, expected_out, $time);
     errors = errors + 1;
   end
 end
