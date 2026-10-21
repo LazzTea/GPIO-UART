@@ -37,7 +37,7 @@ reg loaded_tx_line = 1'b1;
 always @(posedge clk or posedge rst) begin
   if (rst) begin
     state <= 1'b0;
-    bit_count <= 4'b0;
+    bit_count <= 4'b1;
     loaded_tx_line <= 1;
     loaded_data <= data;
 
