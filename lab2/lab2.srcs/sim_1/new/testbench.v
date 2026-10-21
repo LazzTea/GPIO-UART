@@ -48,7 +48,7 @@ rx recv (
   data_out
 );
 
-solo_rx recv (
+rx solo_recv (
   clk,
   rst,
   false_tx_line,
