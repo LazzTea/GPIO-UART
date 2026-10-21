@@ -83,7 +83,7 @@ begin
   @(negedge clk);
   rst = 0;
 
-  repeat(10) @(negedge clk) begin
+  repeat(12) @(negedge clk) begin
     false_tx_line = false_data_in[0];
     $display("Current Recveiver Bit %b", false_tx_line);
     $display("Current Data In Bits %b", false_data_in);
