@@ -20,7 +20,55 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module debouncer(
+module debouncer #(
+    parameter CLK_FREQ_HZ = 50_000_000, // Default 50 MHz clock
+    parameter BOUNCE_MS   = 10          // Time window to wait for bounce to settle
+)(
+    input  wire clk,         // System clock
+    input  wire rst_n,       // Active-low asynchronous reset
+    input  wire noisy_in,    // Raw input from physical button/switch
+    output reg  clean_out    // Debounced, stable output
+);
 
-    );
+    // Calculate the number of clock cycles needed for the bounce duration
+    local find_cycles = (CLK_FREQ_HZ / 1000) * BOUNCE_MS;
+    localparam COUNTER_MAX = find_cycles > 0 ? find_cycles - 1 : 0;
+    localparam WIDTH       = $clog2(COUNTER_MAX + 1);
+
+    // Internal registers for synchronization and counting
+    reg [1:0] sync_reg;
+    reg [WIDTH-1:0] count;
+    
+    // Step 1: Two-stage synchronizer to prevent metastability
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            sync_reg <= 2'b00;
+        end else begin
+            sync_reg <= {sync_reg[0], noisy_in};
+        end
+    end
+
+    wire stable_in = sync_reg[1]; // Synchronized input
+
+    // Step 2: Debounce counter logic
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            count     <= 0;
+            clean_out <= 1'b0;
+        end else begin
+            // If the synchronized input differs from the current debounced output
+            if (stable_in != clean_out) begin
+                if (count == COUNTER_MAX) begin
+                    count     <= 0;
+                    clean_out <= stable_in; // Update output after stability window
+                end else begin
+                    count     <= count + 1;
+                end
+            end else begin
+                count <= 0; // Reset counter if input matches output (or bounces back)
+            end
+        end
+    end
+
 endmodule
+

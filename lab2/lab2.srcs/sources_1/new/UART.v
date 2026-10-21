@@ -52,6 +52,15 @@ always @(posedge clk or posedge rst) begin
 end
 
 
+debouncer send_data_debouncer(
+    .clk(clk),
+    .rst_n(~rst),
+    .noisy_in(send_data),
+    .clean_out(send_data)
+);
+
+
+
 
 tx transmitter(
     .clk(baud_tick),
@@ -69,15 +78,6 @@ rx receiver(
 );
 
 
-always @(posedge clk or posedge rst) begin
-    if (rst) begin
-        
-
-    end else if (send_data) begin
-        
-
-    end
-end
 
 
 endmodule
