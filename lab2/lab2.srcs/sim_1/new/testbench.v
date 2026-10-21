@@ -52,6 +52,7 @@ begin
   @(negedge clk);
   data_in = data;
   rst = 1;
+  @(negedge clk);
   rst = 0;
 end
 endtask
@@ -60,7 +61,10 @@ task send_data_test(input [7:0] data);
 begin
   @(negedge clk);
   data_in = data;
+  rst = 1;
   @(negedge clk);
+  rst = 0;
+  repeat(12) @(negedge clk);
   if (data_out == data) begin
     $display("PASS: sent %b, got %b at %0t", data, data_out, $time);
   end else begin
@@ -77,9 +81,9 @@ always #5 clk = ~clk;
 always @(posedge clk) $display("%0t: Transfer Signal %b", $time, tx_line);
 
 initial begin
-  test_transmission(8'b11111111);
-  test_transmission(8'b00000000);
-  test_transmission(8'b10101010);
+  send_data_test(8'b11111111);
+  send_data_test(8'b00000000);
+  send_data_test(8'b10101010);
 
   if (errors == 0) $display("ALL TESTS PASSED");
   else             $display("%0d ERRORS", errors);
