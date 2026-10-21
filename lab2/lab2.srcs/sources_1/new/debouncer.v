@@ -31,8 +31,8 @@ module debouncer #(
 );
 
     // Calculate the number of clock cycles needed for the bounce duration
-    local find_cycles = (CLK_FREQ_HZ / 1000) * BOUNCE_MS;
-    localparam COUNTER_MAX = find_cycles > 0 ? find_cycles - 1 : 0;
+    localparam integer FIND_CYCLES = (CLK_FREQ_HZ / 1000) * BOUNCE_MS;
+    localparam integer COUNTER_MAX = FIND_CYCLES > 0 ? FIND_CYCLES - 1 : 0;
     localparam WIDTH       = $clog2(COUNTER_MAX + 1);
 
     // Internal registers for synchronization and counting
@@ -71,4 +71,3 @@ module debouncer #(
     end
 
 endmodule
-
