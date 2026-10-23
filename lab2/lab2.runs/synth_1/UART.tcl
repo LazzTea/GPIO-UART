@@ -17,6 +17,7 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
+set_param xicom.use_bs_reader 1
 create_project -in_memory -part xc7a35tcpg236-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -30,6 +31,7 @@ set_property board_part digilentinc.com:basys3:part0:1.2 [current_project]
 set_property ip_output_repo c:/Users/Student/GPIO-UART/lab2/lab2.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_verilog -library xil_defaultlib {
+  C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sources_1/new/debouncer.v
   C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sources_1/new/rx.v
   C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sources_1/new/tx.v
   C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sources_1/new/UART.v

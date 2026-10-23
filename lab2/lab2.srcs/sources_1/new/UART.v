@@ -64,7 +64,7 @@ debouncer send_data_debouncer(
 
 
 tx transmitter(
-    .clk(baud_tick),
+    .clk(clk),
     .rst(rst),
     .data(data_to_send),
     .send_data(send_data_clean),
@@ -72,9 +72,9 @@ tx transmitter(
 );
 
 rx receiver(
-    .clk(baud_tick),
+    .clk(clk),
     .rst(rst),
-    .rx_line(RX),
+    .rx_line(TX),
     .data(data_received)
 );
 

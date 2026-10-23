@@ -1,0 +1,126 @@
+Vivado Simulator 2018.2
+Time resolution is 1 ps
+PASS: sent 00000000, got 00000000 at 140000
+PASS: sent 11111111, got 11111111 at 280000
+PASS: sent 10000001, got 10000001 at 420000
+PASS: sent 01111110, got 01111110 at 560000
+PASS: sent 10101010, got 10101010 at 700000
+PASS: sent 01010101, got 01010101 at 840000
+PASS: sent 00000000, got 00000000 at 990000
+PASS: sent 11111111, got 11111111 at 1140000
+PASS: sent 10000001, got 10000001 at 1290000
+PASS: sent 01111110, got 01111110 at 1440000
+PASS: sent 10101010, got 10101010 at 1590000
+PASS: sent 01010101, got 01010101 at 1740000
+PASS: sent 01010101, got 01010101 at 1890000
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 0
+Current Data In Bits 0111111110
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1011111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1101111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1110111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111011111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111101111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111110111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111011
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111101
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 0
+Current Data In Bits 1111111110
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+PASS: sent 0111111110, got 00000000, expected 00000000 at 2030000
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 0111111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1011111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1101111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1110111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111011111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111101111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111110111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111011
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111101
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 0
+Current Data In Bits 1111111110
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+PASS: sent 0111111111, got 00000000, expected 00000000 at 2170000
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 0
+Current Data In Bits 1111111110
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+Current Data Receiver Bits 00000000
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+Current Data Receiver Bits 11111111
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+Current Data Receiver Bits 11111111
+Current Recveiver Bit 1
+Current Data In Bits 1111111111
+PASS: sent 1111111110, got
