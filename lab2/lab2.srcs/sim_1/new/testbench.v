@@ -132,9 +132,10 @@ begin
   // Allows test to run to finish after interuptions
   rst = 0;
   send = 1;
-  repeat(12) @(negedge clk);
+  repeat(10) @(negedge clk);
 
   // Check Final output
+  @(negedge clk);
   if (data_out == data) begin
     $display("PASS: sent %b, got %b at %0t", data, data_out, $time);
   end else begin
