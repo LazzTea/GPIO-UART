@@ -62,9 +62,11 @@ task send_data_test(input [7:0] data);
 begin
   @(negedge clk);
   data_in = data;
-  rst = 1;
-  @(negedge clk);
-  rst = 0;
+  
+  send = 1'b1;
+  repeat(2) @(negedge clk); 
+  send = 1'b0;
+
   repeat(12) @(negedge clk);
   if (data_out == data) begin
     $display("PASS: sent %b, got %b at %0t", data, data_out, $time);
@@ -80,9 +82,7 @@ task receiver_test(input [9:0] data, input [7:0] expected_out);
 begin
   @(negedge clk);
   false_data_in = data;
-  rst = 1;
-  @(negedge clk);
-  rst = 0;
+  send = 1'b1;
 
   repeat(12) @(negedge clk) begin
     $display("Current Data Receiver Bits %b", false_data_out);
@@ -91,6 +91,7 @@ begin
     $display("Current Data In Bits %b", false_data_in);
     false_data_in = false_data_in >> 1;
     false_data_in[9] = 1'b1;
+    send = 0'b0;
   end
 
   if (false_data_out == expected_out) begin
@@ -108,17 +109,21 @@ begin
   // Load Initial Data and Reset to being
   @(negedge clk);
   data_in = data;
-  rst = 1;
-  @(negedge clk);
-  rst = 0;
+  send = 1'b1;
+
+  // rst = 1;
+  // @(negedge clk);
+  // rst = 0;
 
   // Interupt Part way through
   repeat(interuptTime) @(negedge clk);
   rst = 1;
+  send = 0'b0;
   @(negedge clk);
 
   // Allows test to run to finish after interuptions
   rst = 0;
+  send = 1;
   repeat(12) @(negedge clk);
 
   // Check Final output
