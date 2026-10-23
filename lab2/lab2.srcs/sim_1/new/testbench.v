@@ -33,7 +33,7 @@ wire [7:0] false_data_out;
 reg send = 1'b0;
 
 wire tx_line;
-reg false_tx_line;
+reg false_tx_line = 1'b1;
 
 integer errors = 0;
 
@@ -83,9 +83,10 @@ endtask
 task receiver_test(input [9:0] data, input [7:0] expected_out);
 begin
   @(negedge clk);
+  false_tx_line = 1;
   false_data_in = data;
 
-  repeat(12) @(negedge clk) begin
+  repeat(10) @(negedge clk) begin
     $display("Receiver Bits %b", false_data_out);
     false_tx_line = false_data_in[0];
     $display("Bit in Recveiver %b", false_tx_line);
@@ -96,12 +97,15 @@ begin
             $time, false_tx_line, solo_recv.state, solo_recv.bit_count, solo_recv.loaded_data);
   end
 
+  @(negedge clk);
   if (false_data_out == expected_out) begin
     $display("PASS: sent %b, got %b, expected %b at %0t", data, false_data_out, expected_out, $time);
   end else begin
     $display("FAILED: sent %b, got %b, expected %b at %0t", data, false_data_out, expected_out, $time);
     errors = errors + 1;
   end
+
+  false_tx_line = 1;
 end
 endtask
 
