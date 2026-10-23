@@ -55,7 +55,7 @@ end
 
 debouncer send_data_debouncer(
     .clk(clk),
-    .rst_n(~rst),
+    .rst(rst),
     .noisy_in(send_data),
     .clean_out(send_data_clean)
 );

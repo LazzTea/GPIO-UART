@@ -21,11 +21,11 @@
 
 
 module debouncer #(
-    parameter CLK_FREQ_HZ = 50_000_000, // Default 50 MHz clock
+    parameter CLK_FREQ_HZ = 100_000_000, // Default 100 MHz clock
     parameter BOUNCE_MS   = 10          // Time window to wait for bounce to settle
 )(
     input  wire clk,         // System clock
-    input  wire rst_n,       // Active-low asynchronous reset
+    input  wire rst,         // Active-high asynchronous reset
     input  wire noisy_in,    // Raw input from physical button/switch
     output reg  clean_out    // Debounced, stable output
 );
@@ -40,8 +40,8 @@ module debouncer #(
     reg [WIDTH-1:0] count;
     
     // Step 1: Two-stage synchronizer to prevent metastability
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
             sync_reg <= 2'b00;
         end else begin
             sync_reg <= {sync_reg[0], noisy_in};
@@ -51,8 +51,8 @@ module debouncer #(
     wire stable_in = sync_reg[1]; // Synchronized input
 
     // Step 2: Debounce counter logic
-    always @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
             count     <= 0;
             clean_out <= 1'b0;
         end else begin
