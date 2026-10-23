@@ -30,6 +30,8 @@ wire [7:0] data_out;
 reg [9:0] false_data_in;
 wire [7:0] false_data_out;
 
+reg send = 1'b0;
+
 wire tx_line;
 reg false_tx_line;
 
@@ -39,7 +41,7 @@ tx trans(
   .clk(clk),
   .rst(rst),
   .data(data_in),
-  .send_data(1'b1),
+  .send_data(send),
   .tx_line(tx_line)
 );
 
