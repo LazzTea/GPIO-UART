@@ -58,6 +58,7 @@ always @(posedge clk or posedge rst) begin
         data <= loaded_data;
       end
       state <= 1'b0;
+      bit_count <= 1'b0;
       end
   end
 end

@@ -60,6 +60,8 @@ always @(posedge clk or posedge rst) begin
   end else begin
     loaded_tx_line <= 1'b1;    // stop bit
     state <= 1'b0;
+    bit_count <= 1'b0;
+    loaded_data <= 8'b0;
   end
 end
 
