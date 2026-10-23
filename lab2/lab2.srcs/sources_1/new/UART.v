@@ -30,6 +30,7 @@ module UART(
     output wire [7:0] data_received
 );
 
+wire send_data_clean;
 
 
 reg [12:0] ticker = 13'd0;
@@ -52,12 +53,21 @@ always @(posedge clk or posedge rst) begin
 end
 
 
+debouncer send_data_debouncer(
+    .clk(clk),
+    .rst_n(~rst),
+    .noisy_in(send_data),
+    .clean_out(send_data_clean)
+);
+
+
+
 
 tx transmitter(
     .clk(baud_tick),
     .rst(rst),
     .data(data_to_send),
-    .send_data(send_data),
+    .send_data(send_data_clean),
     .tx_line(TX)
 );
 
@@ -69,15 +79,6 @@ rx receiver(
 );
 
 
-always @(posedge clk or posedge rst) begin
-    if (rst) begin
-        
-
-    end else if (send_data) begin
-        
-
-    end
-end
 
 
 endmodule

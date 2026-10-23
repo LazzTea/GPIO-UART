@@ -3,6 +3,6 @@
 Jun 14 2018
 20:41:02
 C:/Users/Student/GPIO-UART/lab2/lab2.sim/sim_1/behav/xsim/glbl.v,1529022455,verilog,,,,glbl,,,,,,,,
-C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sim_1/new/testbench.v,1792603869,verilog,,,,testbench,,,,,,,,
-C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sources_1/new/rx.v,1792603294,verilog,,C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sources_1/new/tx.v,,rx,,,,,,,,
-C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sources_1/new/tx.v,1792603294,verilog,,C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sim_1/new/testbench.v,,tx,,,,,,,,
+C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sim_1/new/testbench.v,1792606847,verilog,,,,testbench,,,,,,,,
+C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sources_1/new/rx.v,1792607211,verilog,,C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sources_1/new/tx.v,,rx,,,,,,,,
+C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sources_1/new/tx.v,1792607018,verilog,,C:/Users/Student/GPIO-UART/lab2/lab2.srcs/sim_1/new/testbench.v,,tx,,,,,,,,
