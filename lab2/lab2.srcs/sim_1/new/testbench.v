@@ -94,7 +94,7 @@ begin
     false_data_in[9] = 1'b1;
     always @(posedge clk)
     $display("%0t line=%b state=%b cnt=%0d loaded=%b",
-            $time, false_tx_line, dut.state, dut.bit_count, dut.loaded_data);
+            $time, false_tx_line, solo_recv.state, solo_recv.bit_count, solo_recv.loaded_data);
   end
 
   if (false_data_out == expected_out) begin
