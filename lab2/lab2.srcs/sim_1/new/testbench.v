@@ -84,7 +84,7 @@ task receiver_test(input [9:0] data, input [7:0] expected_out);
 begin
   rst = 1;
   @(negedge clk);
-  rst = 0
+  rst = 0;
   false_tx_line = 1;
   false_data_in = data;
 
