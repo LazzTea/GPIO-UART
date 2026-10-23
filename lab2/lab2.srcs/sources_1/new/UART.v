@@ -74,7 +74,7 @@ tx transmitter(
 rx receiver(
     .clk(baud_tick),
     .rst(rst),
-    .rx_line(TX),
+    .rx_line(RX),
     .data(data_received)
 );
 
