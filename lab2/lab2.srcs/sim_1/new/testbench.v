@@ -84,16 +84,14 @@ task receiver_test(input [9:0] data, input [7:0] expected_out);
 begin
   @(negedge clk);
   false_data_in = data;
-  send = 1'b1;
 
   repeat(12) @(negedge clk) begin
-    $display("Current Data Receiver Bits %b", false_data_out);
+    $display("Receiver Bits %b", false_data_out);
     false_tx_line = false_data_in[0];
-    $display("Current Recveiver Bit %b", false_tx_line);
-    $display("Current Data In Bits %b", false_data_in);
+    $display("Bit in Recveiver %b", false_tx_line);
+    $display("Data In Bits %b", false_data_in);
     false_data_in = false_data_in >> 1;
     false_data_in[9] = 1'b1;
-    send = 0'b0;
   end
 
   if (false_data_out == expected_out) begin
