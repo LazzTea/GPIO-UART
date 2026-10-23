@@ -66,10 +66,10 @@ begin
   data_in = data;
   
   send = 1'b1;
-  repeat(2) @(negedge clk); 
+  @(negedge clk); 
   send = 1'b0;
 
-  repeat(12) @(negedge clk);
+  repeat(11) @(negedge clk);
   if (data_out == data) begin
     $display("PASS: sent %b, got %b at %0t", data, data_out, $time);
   end else begin
