@@ -92,7 +92,6 @@ begin
     $display("Data In Bits %b", false_data_in);
     false_data_in = false_data_in >> 1;
     false_data_in[9] = 1'b1;
-    always @(posedge clk)
     $display("%0t line=%b state=%b cnt=%0d loaded=%b",
             $time, false_tx_line, solo_recv.state, solo_recv.bit_count, solo_recv.loaded_data);
   end
