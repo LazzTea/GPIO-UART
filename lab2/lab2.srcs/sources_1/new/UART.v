@@ -31,6 +31,8 @@ module UART(
 );
 
 wire send_data_clean;
+reg send_data_clean_prev = 1'b0;
+wire send_data_pulse;
 
 
 reg [13:0] ticker = 14'd0;
@@ -53,13 +55,24 @@ always @(posedge clk or posedge rst) begin
 end
 
 
-debouncer send_data_debouncer(
-    .clk(clk),
+debouncer #(
+    .CLK_FREQ_HZ(9_600)
+) send_data_debouncer(
+    .clk(baud_tick),
     .rst(rst),
     .noisy_in(send_data),
     .clean_out(send_data_clean)
 );
 
+always @(posedge baud_tick or posedge rst) begin
+    if (rst) begin
+        send_data_clean_prev <= 1'b0;
+    end else begin
+        send_data_clean_prev <= send_data_clean;
+    end
+end
+
+assign send_data_pulse = send_data_clean & ~send_data_clean_prev;
 
 
 
@@ -67,7 +80,7 @@ tx transmitter(
     .clk(baud_tick),
     .rst(rst),
     .data(data_to_send),
-    .send_data(send_data_clean),
+    .send_data(send_data_pulse),
     .tx_line(TX)
 );
 
